@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "dev": "tsx watch src/shared/infra/server.ts",
+    "dev": "tsx watch --inspect src/shared/infra/server.ts",
     "build": "tsup src --out-dir build",
     "start": "node build/shared/infra/server.js"
   },
@@ -13,7 +13,9 @@
   "license": "ISC",
   "devDependencies": {
     "@rocketseat/eslint-config": "2.1.0",
+    "@types/bcrypt": "5.0.0",
     "@types/node": "20.4.4",
+    "@types/nodemailer": "6.4.9",
     "@types/uuid": "9.0.2",
     "eslint": "8.45.0",
     "prisma": "5.0.0",
@@ -22,11 +24,15 @@
     "typescript": "5.1.6"
   },
   "dependencies": {
+    "@fastify/cors": "8.3.0",
+    "@fastify/jwt": "7.2.0",
     "@prisma/client": "5.0.0",
+    "axios": "1.5.0",
     "bcrypt": "5.1.0",
+    "date-fns": "2.30.0",
     "dotenv": "16.3.1",
     "fastify": "4.20.0",
-    "ts-node": "10.9.1",
+    "nodemailer": "6.9.5",
     "tslog": "4.9.1",
     "uuid": "9.0.0",
     "zod": "3.21.4"

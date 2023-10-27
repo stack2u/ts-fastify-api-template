@@ -1,78 +1,43 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["multiSchema"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["administration"]
 }
 
-model companies {
-  id       Int        @id @default(autoincrement())
-  cnpj     String     @db.VarChar(14)
-  name     String
-  phone    String?
-  email    String
-  logo_url String?
-  profiles profiles[]
-
-  @@schema("administration")
-}
-
-model modules {
-  id       Int     @id @default(autoincrement())
-  name     String
-  icon     String? @db.VarChar(50)
-  color    String  @db.VarChar(7)
-  base_url String
-  logo_url String
-  paths    Json?   @db.Json
-
-  @@schema("administration")
-}
-
-model profiles {
-  id          Int       @id @default(autoincrement())
+model Profiles {
+  id          String  @id @default(uuid())
   description String
-  roles       Json?     @db.Json
-  id_company  Int
-  companies   companies @relation(fields: [id_company], references: [id], onDelete: Cascade, map: "profiles_fk")
-  users       users[]
+  is_admin    Boolean
+  Users       Users[]
 
-  @@schema("administration")
+  @@map("profiles")
 }
 
-model user_types {
-  id          Int     @id @default(autoincrement())
-  description String
-  is_admin    Boolean @default(false)
-  users       users[]
+model Users {
+  id         String  @id @default(uuid())
+  name       String
+  email      String  @unique
+  whatsapp   String
+  avatar     String?
+  password   String
+  id_profile String
 
-  @@schema("administration")
+  profile Profiles @relation(fields: [id_profile], references: [id])
+  tokens  Tokens[]
+
+  @@map("users")
 }
 
-model users {
-  id           Int        @id @default(autoincrement())
-  name         String
-  email        String
-  phone        String?
-  password     String
-  id_profile   Int
-  id_user_type Int
-  tokens       tokens[]
-  profiles     profiles   @relation(fields: [id_profile], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_fk")
-  user_types   user_types @relation(fields: [id_user_type], references: [id], onDelete: Cascade, map: "users_types_fk")
+model Tokens {
+  id        String   @id @default(uuid())
+  token     String
+  createdAt DateTime @default(now())
 
-  @@schema("administration")
-}
+  user    Users  @relation(fields: [user_id], references: [id])
+  user_id String
 
-model tokens {
-  id      Int    @id(map: "pk_token") @default(autoincrement())
-  id_user Int
-  token   String
-  users   users  @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_users")
-
-  @@schema("administration")
+  @@map("tokens")
 }
