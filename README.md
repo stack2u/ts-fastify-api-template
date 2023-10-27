@@ -1,1 +1,1 @@
-# flixbank-api
+# Template de API usando Fastfy e Prisma
