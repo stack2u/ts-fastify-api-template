@@ -19,8 +19,8 @@
     "@types/uuid": "9.0.2",
     "eslint": "8.45.0",
     "prisma": "5.0.0",
-    "tsup": "7.1.0",
-    "tsx": "3.12.7",
+    "tsup": "8.0.1",
+    "tsx": "4.7.0",
     "typescript": "5.1.6"
   },
   "dependencies": {
