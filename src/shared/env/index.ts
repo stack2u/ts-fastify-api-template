@@ -9,6 +9,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'test', 'production']).default('dev'),
   PORT: z.coerce.number().default(3333),
   DATABASE_URL: z.string().default(''),
+  SHADOW_DATABASE_URL: z.string().default(''),
   JWT_SECRET: z.string(),
   JWT_EXPIRES_IN: z.string(),
   SALT_RESULT: z.coerce.number().default(10),
