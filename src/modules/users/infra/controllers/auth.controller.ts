@@ -28,9 +28,7 @@ export async function login(request: FastifyRequest, reply: FastifyReply) {
   )
 
   return reply.send({
-    data: {
-      user: { ...user, password: undefined },
-      token,
-    },
+    user: { ...user, password: undefined },
+    token,
   })
 }
