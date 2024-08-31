@@ -3,7 +3,7 @@ import { Logger } from 'tslog'
 const logger = new Logger({
   type: 'pretty',
   parentNames: ['api'],
-  name: 'cleper',
+  name: 'stack',
   hideLogPositionForProduction: true,
   prettyLogTemplate:
     '{{yyyy}}.{{mm}}.{{dd}} {{hh}}:{{MM}}:{{ss}} {{logLevelName}} [{{filePathWithLine}}{{name}}]: ',
